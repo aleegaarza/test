@@ -9,7 +9,7 @@ import {
   Col,
 } from "react-bootstrap";
 import Close from "../images/Close";
-const ModalAddCharacters = ({ show, onClose }) => {
+const ModalAddCharacters = ({ show, onClose, characters }) => {
   if (!show) return null;
   return (
     <Modal show={show} className="mt-5">
