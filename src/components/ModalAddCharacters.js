@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { postCharacters } from "./addCharacter";
 import {
   Modal,
   Button,
@@ -9,7 +11,35 @@ import {
   Col,
 } from "react-bootstrap";
 import Close from "../images/Close";
-const ModalAddCharacters = ({ show, onClose, characters }) => {
+const ModalAddCharacters = ({ show, onClose }) => {
+  const dispatch = useDispatch();
+
+  const [character, setCharacter] = useState({ id: "" });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setCharacter({ ...character, [id]: value });
+  };
+
+  const onClickGender = (e) => {
+    const { value } = e.target;
+    setCharacter({ ...character, gender: value });
+  };
+
+  const onClickPosition = (e) => {
+    const { value } = e.target;
+    const staff = value === "staff" ? true : false;
+    const student = value === "student" ? true : false;
+    setCharacter({
+      ...character,
+      hogwartsStaff: staff,
+      hogwartsStudent: student,
+    });
+  };
+
+  useEffect(() => {
+    setCharacter({ ...character, id: new Date().getUTCMilliseconds() });
+  }, []);
   if (!show) return null;
   return (
     <Modal show={show} className="mt-5">
@@ -22,28 +52,28 @@ const ModalAddCharacters = ({ show, onClose, characters }) => {
       <ModalBody className="modal-body">
         <Row className="modal-container">
           <Col>
-            <label className="">NOMBRE</label>
+            <label>NOMBRE</label>
             <input
               type={"text"}
               id="name"
               className="input-txt"
-              //   onChange={handleChange}
+              onChange={handleChange}
             ></input>
             <label>COLOR DE OJOS</label>
             <input
               type={"text"}
               id="eyeColour"
-              className="input-txt"
-              //   onChange={handleChange}
+              className="input-txt mb-2"
+              onChange={handleChange}
             ></input>
-            <label className="mt-3">GÉNERO</label>
+            <label>GÉNERO</label>
             <div className="">
               <input
                 type={"radio"}
                 value="female"
                 id="genderWoman"
                 name="gender"
-                // onClick={onClickGender}
+                onClick={onClickGender}
               />{" "}
               <label className="me-3" htmlFor="woman">
                 Mujer
@@ -53,7 +83,7 @@ const ModalAddCharacters = ({ show, onClose, characters }) => {
                 value="male"
                 id="genderMan"
                 name="gender"
-                // onClick={onClickGender}
+                onClick={onClickGender}
               />{" "}
               <label htmlFor="man">Hombre</label>
             </div>
@@ -63,24 +93,24 @@ const ModalAddCharacters = ({ show, onClose, characters }) => {
             <input
               type={"text"}
               id="dateOfBirth"
-              //   onChange={handleChange}
+              onChange={handleChange}
               className="input-txt"
             ></input>
             <label>COLOR DE PELO</label>
             <input
               type={"text"}
               id="hairColour"
-              className="input-txt"
-              //   onChange={handleChange}
+              className="input-txt mb-2"
+              onChange={handleChange}
             ></input>
-            <label className="mt-3">POSICIÓN</label>
+            <label>POSICIÓN</label>
             <div>
               <input
                 type={"radio"}
                 value="student"
                 id="positionStudent"
                 name="position"
-                // onClick={onClickPosition}
+                onClick={onClickPosition}
               />{" "}
               <label className="me-3" htmlFor="student">
                 Estudiante
@@ -90,7 +120,7 @@ const ModalAddCharacters = ({ show, onClose, characters }) => {
                 value="staff"
                 id="positionStaff"
                 name="position"
-                // onClick={onClickPosition}
+                onClick={onClickPosition}
               />{" "}
               <label htmlFor="staff">Staff</label>
             </div>
@@ -98,7 +128,11 @@ const ModalAddCharacters = ({ show, onClose, characters }) => {
         </Row>
       </ModalBody>
       <ModalFooter className="d-flex justify-content-center">
-        <Button className="add-btn" onClick={onClose}>
+        <Button
+          type="submit"
+          className="add-btn"
+          onClick={() => dispatch(postCharacters(character), onClose())}
+        >
           Guardar
         </Button>
       </ModalFooter>

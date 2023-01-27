@@ -1,5 +1,11 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
+body {
+  background-image: url("../src/images/Background.svg");
+  background-attachment: fixed;
+  background-color: black;
+  background-size: cover;
+}
 .btnnav {
   background-color: #6b63b5;
   border-color: #6b63b5;
@@ -8,6 +14,9 @@
   &:hover {
     background-color: rgba(107, 99, 181, 0.6);
     border-color: #6b63b5;
+    &:active {
+      background-color: #6b63b5;
+    }
   }
 }
 
@@ -25,13 +34,18 @@
   &:hover {
     background-color: rgba(107, 99, 181, 0.6);
     border-color: #0000;
-    &:active {
-      background-color: #6b63b5;
-      border-color: #0000;
-    }
   }
 }
+.btnsactive {
+  background-color: #6b63b5;
+}
+.favs-dropdown {
+  background: #6b63b5;
+}
 
+.delete {
+  cursor: pointer;
+}
 .add-btn {
   width: 288px;
   height: 67px;
@@ -67,7 +81,8 @@
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: row;
-  margin: 8%;
+  margin: 10%;
+  height: 220px;
 }
 
 .bg-imgGryffindor {
@@ -118,8 +133,8 @@
   display: flex;
   width: 150px;
   height: 100%;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   align-items: center;
   background: rgb(255, 244, 0);
   background: linear-gradient(
@@ -154,4 +169,14 @@
   border-radius: 50%;
   align-items: center;
   margin-left: 20px;
+}
+
+.fav-img {
+  width: 26px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.dropdown-txt {
+  font-size: small;
 }

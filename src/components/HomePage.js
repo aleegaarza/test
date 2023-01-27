@@ -7,34 +7,80 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ModalAddCharacters from "./ModalAddCharacters";
 import Cards from "./Cards";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getCharacters } from "./addCharacter";
+import {
+  filterCharacter,
+  removeFavorite,
+  setFavorite,
+} from "../redux/characters";
+import { Dropdown } from "react-bootstrap";
+import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
+import Trash from "../images/Trash";
 const HomePage = () => {
+  const { characters, favorites } = useSelector((state) => state.characters);
+  const { isStudent, isStaff } = useSelector((state) => state.characters);
   const [show, setShow] = useState(false);
-  const [characters, setCharacters] = useState([]);
+  const [dropdown, setDropdown] = useState(false);
+  const [selected, setSelected] = useState(false);
+  const dispatch = useDispatch();
 
-  const addCharacters = (character) => {};
-
+  const toggleDropDown = () => {
+    setDropdown(!dropdown);
+  };
+  const handleRemoveFav = (character) => {
+    dispatch(removeFavorite(character));
+    console.log(favorites);
+  };
   useEffect(() => {
-    fetch("http://localhost:3500/characters")
-      .then((response) => response.json())
-      .then((data) => {
-        setCharacters(data);
-        console.log(data);
-      });
+    dispatch(getCharacters());
   }, []);
-
   return (
     <div>
       <div className="d-flex justify-content-end me-5">
-        <Button type="button" className="btnnav">
-          Favoritos <Bookmark />
-        </Button>
+        <Dropdown isOpen={dropdown} toggle={toggleDropDown}>
+          <DropdownToggle
+            className="btnnav"
+            style={{
+              backgroundColor: "#6b63b5",
+            }}
+          >
+            Favoritos <Bookmark />
+          </DropdownToggle>
+          <DropdownMenu className="favs-dropdown">
+            <div className="d-flex flex-column ms-2 align-items-center justify-content-center">
+              {favorites?.map((character) => (
+                <div className="d-flex" key={character.name}>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <img
+                      className="fav-img me-2"
+                      src={character.image}
+                      alt={characters.name}
+                    />
+                  </div>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <p className="fw-semibold text-white dropdown-txt me-4">
+                      {character.name}{" "}
+                    </p>
+                  </div>
+                  <div
+                    onClick={() => handleRemoveFav(character)}
+                    className="delete d-flex align-items-center"
+                  >
+                    <Trash />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </DropdownMenu>
+        </Dropdown>
+
         <Button
           type="button"
           className="btnnav"
           onClick={() => {
             setShow(true);
-            console.log(setShow);
           }}
         >
           Agregar <AddUser />
@@ -47,11 +93,21 @@ const HomePage = () => {
         </h3>
       </Row>
       <Col className="d-flex justify-content-center mt-5" sm={12} lg={12}>
-        <Button className="btns w-25"> ESTUDIANTES</Button>
-        <Button className="btns w-25">STAFF</Button>
+        <Button
+          onClick={() => dispatch(filterCharacter({ isStudent: !isStudent }))}
+          className={isStudent ? "btns btnsactive w-25" : "btns w-25"}
+        >
+          <div>ESTUDIANTES</div>
+        </Button>
+        <Button
+          onClick={() => dispatch(filterCharacter({ isStaff: !isStaff }))}
+          className={isStaff ? "btns btnsactive w-25" : "btns w-25"}
+        >
+          STAFF
+        </Button>
       </Col>
       <div className="cards-container">
-        {characters.map((characters, id) => {
+        {characters?.map((characters, id) => {
           return <Cards key={id} characters={characters} />;
         })}
       </div>
