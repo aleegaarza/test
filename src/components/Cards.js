@@ -3,19 +3,25 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import BookmarkSelected from "../images/BookmarkSelected";
 import BookmarkUnselected from "../images/BookmarkUnselected";
-import { setFavorite } from "../redux/characters";
+import { removeFavorite, setFavorite } from "../redux/characters";
 
-const Cards = ({ characters }) => {
-  const [selected, setSelected] = useState(false);
+const Cards = ({ characters, favorites }) => {
   const dispatch = useDispatch();
+  const [selected, setSelected] = useState(false);
 
-  const handleAddToFavorites = (characters) => {
-    dispatch(setFavorite(characters));
-    setSelected(!selected);
+  const handleAddToFavorites = () => {
+    if (selected) {
+      dispatch(removeFavorite(characters.name));
+      setSelected((prevState) => !prevState);
+    } else {
+      dispatch(setFavorite(characters));
+      setSelected((prevState) => !prevState);
+    }
   };
+
   return (
     <>
-      <Card className="m-1" style={{ width: "30rem" }}>
+      <Card className="m-1 text-cards" style={{ width: "30rem" }}>
         <div className="d-flex align-items-start">
           <div></div>
           <div
@@ -43,11 +49,15 @@ const Cards = ({ characters }) => {
               </span>
               <div
                 onClick={() => {
-                  handleAddToFavorites(characters);
+                  handleAddToFavorites();
                 }}
                 className="cursor-pointer d-flex justify-content-end position-absolute top-0 end-0 me-4 mt-1"
               >
-                {selected ? <BookmarkSelected /> : <BookmarkUnselected />}
+                {selected ? (
+                  <BookmarkSelected onClick={handleAddToFavorites} />
+                ) : (
+                  <BookmarkUnselected onClick={handleAddToFavorites} />
+                )}
               </div>
             </div>
             <h2 className="name">{characters.name} </h2>

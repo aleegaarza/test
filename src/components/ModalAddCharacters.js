@@ -50,7 +50,7 @@ const ModalAddCharacters = ({ show, onClose }) => {
         </div>
       </ModalHeader>
       <ModalBody className="modal-body">
-        <Row className="modal-container">
+        <Row>
           <Col>
             <label>NOMBRE</label>
             <input

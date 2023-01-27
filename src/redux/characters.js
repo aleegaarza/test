@@ -37,14 +37,11 @@ export const charactersSlice = createSlice({
       }
     },
     setFavorite: (state, action) => {
-      const favIndex = state.favorites.findIndex(
+      const favIndex = state.favorites.find(
         (fav) => fav.name === action.payload.name
       );
-      if (favIndex >= 0) {
-        state.favorites[favIndex].favsQuantity = 1;
-      } else {
-        const tempFav = { ...action.payload, favsQuantity: 1 };
-        state.favorites.push(tempFav);
+      if (!favIndex) {
+        state.favorites.push(action.payload);
       }
       localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },

@@ -23,18 +23,18 @@ const HomePage = () => {
   const { isStudent, isStaff } = useSelector((state) => state.characters);
   const [show, setShow] = useState(false);
   const [dropdown, setDropdown] = useState(false);
-  const [selected, setSelected] = useState(false);
   const dispatch = useDispatch();
 
   const toggleDropDown = () => {
     setDropdown(!dropdown);
   };
-  const handleRemoveFav = (character) => {
-    dispatch(removeFavorite(character));
-    console.log(favorites);
+  const handleRemoveFav = (characters) => {
+    dispatch(removeFavorite(characters));
+    console.log(characters);
   };
   useEffect(() => {
     dispatch(getCharacters());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>
@@ -108,7 +108,9 @@ const HomePage = () => {
       </Col>
       <div className="cards-container">
         {characters?.map((characters, id) => {
-          return <Cards key={id} characters={characters} />;
+          return (
+            <Cards key={id} characters={characters} favorites={favorites} />
+          );
         })}
       </div>
       <ModalAddCharacters show={show} onClose={() => setShow(false)} />

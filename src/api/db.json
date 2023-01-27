@@ -549,16 +549,6 @@
       "actor": "David Bradley",
       "alive": true,
       "image": "http://hp-api.herokuapp.com/images/filch.jpg"
-    },
-    {
-      "id": 749,
-      "gender": "female",
-      "name": "mariana",
-      "eyeColour": "azules",
-      "dateOfBirth": "13 febrero",
-      "hairColour": "cafe",
-      "hogwartsStaff": false,
-      "hogwartsStudent": true
     }
   ]
 }

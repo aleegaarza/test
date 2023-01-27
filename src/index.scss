@@ -3,7 +3,6 @@
 body {
   background-image: url("../src/images/Background.svg");
   background-attachment: fixed;
-  background-color: black;
   background-size: cover;
 }
 .btnnav {
@@ -179,4 +178,157 @@ body {
 
 .dropdown-txt {
   font-size: small;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    background-image: url("");
+    background-color: gray;
+  }
+  .btnnav {
+    background-color: #6b63b5;
+    border-color: #6b63b5;
+    height: 38px;
+    color: white;
+    &:hover {
+      background-color: rgba(107, 99, 181, 0.6);
+      border-color: #6b63b5;
+      &:active {
+        background-color: #6b63b5;
+      }
+    }
+  }
+
+  .btns {
+    border: solid 4px;
+    border-color: #6b63b5;
+    background-color: #0000;
+    font-family: "Open Sans";
+    font-size: 12px;
+    color: #ffff;
+    font-weight: 400;
+    margin: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(107, 99, 181, 0.6);
+      border-color: #0000;
+    }
+  }
+
+  .input-txt {
+    width: 160px;
+    height: 20px;
+    margin: 2px 0px;
+    background-color: #e5e5e5;
+    font-size: 10px;
+    border-radius: 4px;
+    border-color: #e5e5e5;
+  }
+
+  .bg-imgGryffindor {
+    display: flex;
+    width: 100px;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    background: rgb(191, 6, 6);
+    background: linear-gradient(
+      73deg,
+      rgba(191, 6, 6, 1) 0%,
+      rgba(215, 153, 1, 1) 60%,
+      rgba(255, 152, 0, 0.7106481481481481) 100%
+    );
+  }
+
+  .bg-imgSlytherin {
+    display: flex;
+    width: 100px;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    background: rgb(19, 163, 0);
+    background: linear-gradient(
+      166deg,
+      rgba(19, 163, 0, 1) 0%,
+      rgba(0, 223, 37, 0.7106481481481481) 100%
+    );
+  }
+  .bg-imgRavenclaw {
+    display: flex;
+    width: 100px;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    background: rgb(0, 196, 219);
+    background: linear-gradient(
+      166deg,
+      rgba(0, 196, 219, 1) 0%,
+      rgba(0, 231, 241, 0.5886729691876751) 100%
+    );
+  }
+  .bg-imgHufflepuff {
+    display: flex;
+    width: 100px;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    background: rgb(255, 244, 0);
+    background: linear-gradient(
+      166deg,
+      rgba(255, 244, 0, 1) 0%,
+      rgba(255, 252, 128, 0.5886729691876751) 100%
+    );
+  }
+
+  .bg-imgnull {
+    display: flex;
+    width: 100px;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+    background: black;
+  }
+
+  .bg-img {
+    display: flex;
+    width: 100px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    align-items: center;
+  }
+  .img {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    align-items: center;
+    margin-left: 1px;
+  }
+
+  .text-cards {
+    font-size: x-small;
+  }
+  .dropdown-txt {
+    font-size: small;
+  }
+  .modal {
+    width: 250px;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
 }
