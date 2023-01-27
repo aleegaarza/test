@@ -36,3 +36,6 @@ improving the styles by showing the cards and updating without having to reload 
 
 I had an error when making the request to the api since it was calling a different url than the one I had generated from the json server, \
 I corrected it by changing the path and adding a new script to execute this json file inside the json package
+
+### `Deployed app`
+https://harrypotter-test.netlify.app/
